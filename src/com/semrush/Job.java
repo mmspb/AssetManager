@@ -1,8 +1,6 @@
 package com.semrush;
 
-
 import java.util.Set;
-
 /**
  * Represents a sub task to perform
  *
@@ -11,7 +9,6 @@ import java.util.Set;
  * @author maxim
  */
 public class Job {
-
     /**
      * URL of a site to be analyzed
      */

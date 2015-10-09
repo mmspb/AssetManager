@@ -25,53 +25,35 @@ public class SemRushCrawler {
      * Specifies how many threads are created per CPU core
      */
     public static final int LOAD_KOEFF = 10;
-
     /**
      * Specifies how many urls need to be collected from a site
      */
     public static final int MAX_PAGES = 100;
-
     /**
      * Executor Service
      */
     private ExecutorService executorService;
-
     /**
      * Runnables
      */
     private List<Worker> threads;
-
     /**
      * Expected results handles
      */
     private Set<Job> completedJobs;
-
     /**
      * Stores strings loaded from file
      *
      */
     private Set<String> data;
-
     /**
      * Stores queue of jobs
      */
     private BlockingQueue<Job> jobsQueue;
-
     /**
      * List of working threds
      */
     private AtomicInteger active;
-
-    /**
-     * Input file name
-     */
-    private static String inputFile;
-
-    /**
-     * Output file name
-     */
-    private static String outputFile;
-
     /**
      * Start time
      */
@@ -126,11 +108,9 @@ public class SemRushCrawler {
 
     /**
      * Launches workers to process a set of sites
-     * @param sites
      * @return reference to a queue with jobs
      */
     public BlockingQueue<Job> launch() {
-
         jobsQueue = new ArrayBlockingQueue(data.size());
         completedJobs = new HashSet<>();
 
@@ -149,18 +129,16 @@ public class SemRushCrawler {
             threads.add(worker);
             executorService.submit(worker);
         }
-
         return jobsQueue;
     }
 
     /**
      * Loads a list of URLs from the specified file
-     * @param file contains list of urls
+     * @param fileName file with urls
      * @return List of URLs
      */
     public Set<String> load(String fileName) {
         data = Collections.synchronizedSet(new HashSet<>());
-
         try {
             Path file = Paths.get(fileName);
             List<String> lines = Files.readAllLines(file, StandardCharsets.ISO_8859_1);
@@ -174,7 +152,6 @@ public class SemRushCrawler {
         }catch (Exception e) {
             e.printStackTrace();
         }
-
         return data;
     }
 
@@ -198,7 +175,6 @@ public class SemRushCrawler {
 
     /**
      * Waits until the process is completed
-     * @param queue
      */
     public void await() {
         while(true) {
@@ -231,7 +207,6 @@ public class SemRushCrawler {
                 e.printStackTrace();
             }
         }
-
         return finalResultSet;
     }
 
@@ -253,7 +228,6 @@ public class SemRushCrawler {
         }
         return false;
     }
-
 
     /**
      * Writes start time into variable
