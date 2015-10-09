@@ -59,7 +59,7 @@ public class SemRushCrawler {
      */
     private static long startTime;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         if(args == null) {
             System.out.println("ERROR: no args specified!");
@@ -74,7 +74,7 @@ public class SemRushCrawler {
         if(args[0] != null) {
             crawler.load(args[0]);
         } else {
-            return;
+            throw new Exception("No input file!");
         }
 
         /**
@@ -92,7 +92,7 @@ public class SemRushCrawler {
          */
         Set results = crawler.collect();
 
-        System.out.println("[Semrush Crawler] Urls collected: " + results.size());
+        System.out.println("[Semrush Crawler] Total urls collected: " + results.size());
         /**
          * 5. Shut the workers down
          */
@@ -101,7 +101,11 @@ public class SemRushCrawler {
         /**
          * 6. Write the results to the output file
          */
-        crawler.save(args[1], results);
+        if(args[1] != null) {
+            crawler.save(args[1], results);
+        } else {
+            throw new Exception("No output file!");
+        }
 
         end();
     }

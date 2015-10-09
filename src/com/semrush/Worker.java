@@ -181,7 +181,7 @@ public class Worker extends Thread implements Runnable {
 
                     if (!visitedUrls.contains(url) && !collectedUrls.contains(url) && collectedUrls.size() < job.getMaxUrlsOnPage()) {
                         collectedUrls.add(url);
-                        if(!urlsToProcess.contains(url) && urlsToProcess.size() < 1000) {
+                        if(!urlsToProcess.contains(url)) {
                             urlsToProcess.offer(url);
                         }
                     }
