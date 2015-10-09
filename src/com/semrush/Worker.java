@@ -189,5 +189,4 @@ public class Worker extends Thread implements Runnable {
             }
         }
     }
-
 }
