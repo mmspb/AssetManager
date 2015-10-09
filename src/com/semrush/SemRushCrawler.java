@@ -247,6 +247,4 @@ public class SemRushCrawler {
         long endTime = System.currentTimeMillis() - startTime;
         System.out.println("[ TOTAL EXECUTION TIME ] " + endTime/1000 + " seconds");
     }
-
-
 }
